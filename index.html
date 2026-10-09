@@ -1,43 +1,14 @@
-html
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JIBU AI - Kenya</title>
-<style>
-body{font-family:Arial;background:#f0f4ff;padding:20px;text-align:center}
-.box{background:white;padding:20px;border-radius:15px;max-width:500px;margin:20px auto;box-shadow:0 4px 10px rgba(0,0,0,0.1)}
-input{width:90%;padding:15px;border-radius:10px;border:2px solid #0066ff;font-size:18px}
-button{padding:15px 30px;background:#0066ff;color:white;border:none;border-radius:10px;font-size:18px;margin-top:10px}
-#answer{margin-top:20px;text-align:left;background:#eef5ff;padding:15px;border-radius:10px;min-height:100px;white-space:pre-wrap}
-</style>
-</head>
-<body>
-<h1>🇰🇪 JIBU AI</h1>
-<p>Ask me anything - I will Jibu!</p>
-<div class="box">
-<input id="q" placeholder="Type here: Translate hello to Swahili">
-<br>
-<button onclick="ask()">Search 🔍</button>
-<div id="answer">Answer will appear here...</div>
-</div>
+<html><head><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JIBU AI</title>
+<style>body{font-family:Arial;background:#f0f0f0;padding:20px;text-align:center}.box{max-width:500px;margin:auto;background:white;padding:20px;border-radius:10px}input{width:90%;padding:12px}button{padding:12px 20px;margin-top:10px;background:green;color:white;border:none;border-radius:8px} #answer{margin-top:20px;text-align:left;background:#eef7ff;padding:15px;border-radius:8px}</style>
+</head><body><div class="box"><h2>JIBU AI 🇰🇪</h2><input id="q" placeholder="Ask: translate hello to Swahili"><br><button onclick="ask()">Search</button><div id="answer">Answer here...</div></div>
 <script>
-const API_KEY=AQ.Ab8RN6Kw_ZHHt4v4bEoC5nCbe-vzCMC0PyekpNUW4OIs5cuU9A
- let qq=document.getElementById("q").value;
- let ans=document.getElementById("answer");
- if(!qq){ans.innerText="Please type something!";return;}
- ans.innerText="Thinking...";
- try{
-  let r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`,{
-   method:"POST",
-   headers:{"Content-Type":"application/json"},
-   body:JSON.stringify({contents:[{parts:[{text:qq}]}]})
-  });
-  let d=await r.json();
-  if(d.error){ans.innerText="Error: "+d.error.message; return;}
-  ans.innerText=d.candidates[0].content.parts[0].text;
- }catch(e){ans.innerText="Error: "+e.message+" Check your API key!"}
+const API_KEY="AQ.AB8RN6JW5W7ZUvESpN9MN3U1W1KD2Y156WIEkoMEG...";
+async function ask(){
+let q=document.getElementById('q').value;let a=document.getElementById('answer');
+if(!q){a.innerText="Type something!";return;}a.innerText="Thinking...";
+try{let r=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({contents:[{parts:[{text:q}]}]})});
+let d=await r.json();if(d.error){a.innerText="Error: "+d.error.message;return;}a.innerText=d.candidates[0].content.parts[0].text;}catch(e){a.innerText="Error: "+e.message;}
 }
-</script>
-</body>
-</html>
+</script></body></html>
