@@ -1,0 +1,46 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JIBU AI - Kenya Search</title>
+<style>
+body{margin:0;font-family:Arial;background:#fff;min-height:100vh;display:flex;flex-direction:column}
+header{display:flex;justify-content:flex-end;padding:15px;gap:15px}
+.logo{text-align:center;margin-top:100px}
+.logo h1{font-size:70px;margin:0}
+.box{width:90%;max-width:560px;margin:30px auto;border:1px solid #ddd;border-radius:24px;display:flex;padding:12px 20px}
+.box input{flex:1;border:0;outline:none;font-size:16px}
+.box button{border:0;background:none;font-size:20px}
+#ans{width:90%;max-width:700px;margin:20px auto;padding:15px;border:1px solid #eee;border-radius:8px;display:none;white-space:pre-wrap}
+footer{margin-top:auto;background:#f2f2f2;padding:10px;text-align:center;font-size:12px}
+</style>
+</head>
+<body>
+<div class="logo"><h1>JIBU AI</h1><p>Kenya's Own Google 🇰🇪</p></div>
+<div class="box">
+<input id="q" placeholder="Ask JIBU anything..." onkeypress="if(event.key==='Enter')ask()">
+<button onclick="ask()">🔍</button>
+</div>
+<div id="ans"></div>
+<footer>jibuai-kenya.github.io | Made in Kenya</footer>
+<script>AQ.Ab8RN6J_ooiERimKqKJYuSVdjAxj4AKP1zlQokvAIU6astSQrg
+const API_KEY="
+async function ask(){
+let q=document.getElementById('q').value;
+if(!q)return;
+let a=document.getElementById('ans');
+a.style.display='block';
+a.innerText='JIBU is thinking...';
+try{
+let r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key='+API_KEY,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:q}]}]})});
+let d=await r.json();
+a.innerText=d.candidates[0].content.parts[0].text
+}catch(e){a.innerText='Error! API Key wrong. Go to aistudio.google.com to get correct key and replace it in code.'}
+}
+</script>
+</body>
+</htmL
